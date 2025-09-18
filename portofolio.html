@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elza Mahdayanti - Data Analyst Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #fdf2f8 100%);
+        }
+        
+        .pink-gradient {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ec4899, #be185d);
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #ec4899;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #ec4899; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-pink-600">Elza Mahdayanti</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-pink-600 transition-colors">Beranda</a>
+                    <a href="#about" class="text-gray-700 hover:text-pink-600 transition-colors">Tentang</a>
+                    <a href="#skills" class="text-gray-700 hover:text-pink-600 transition-colors">Keahlian</a>
+                    <a href="#projects" class="text-gray-700 hover:text-pink-600 transition-colors">Proyek</a>
+                    <a href="#contact" class="text-gray-700 hover:text-pink-600 transition-colors">Kontak</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white/90 backdrop-blur-md hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-pink-600">Beranda</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-pink-600">Tentang</a>
+                <a href="#skills" class="block py-2 text-gray-700 hover:text-pink-600">Keahlian</a>
+                <a href="#projects" class="block py-2 text-gray-700 hover:text-pink-600">Proyek</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-pink-600">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 fade-in">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                        Halo, Saya <span class="text-pink-600">Elza</span>
+                    </h1>
+                    <h2 class="text-2xl lg:text-3xl text-gray-600 mb-6">
+                        <span id="typing-text" class="typing-animation">Data Analyst</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Mengubah data menjadi insight yang berharga untuk mendukung pengambilan keputusan bisnis yang tepat.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="scrollToSection('projects')" class="pink-gradient text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Lihat Proyek Saya
+                        </button>
+                        <button onclick="scrollToSection('contact')" class="border-2 border-pink-600 text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-pink-600 hover:text-white transition-all">
+                            Hubungi Saya
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center fade-in">
+                    <div class="relative">
+                        <div class="w-80 h-80 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-2xl">
+                            <i class="fas fa-chart-line text-white text-8xl"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-database text-pink-600 text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-brain text-pink-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Tentang Saya</h2>
+                <div class="w-20 h-1 pink-gradient mx-auto rounded"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Passionate Data Analyst</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Saya adalah seorang data analyst yang berpengalaman dalam menganalisis data kompleks dan mengubahnya menjadi insight yang actionable. Dengan latar belakang yang kuat dalam statistik dan pemrograman, saya membantu organisasi membuat keputusan berbasis data.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Keahlian saya meliputi data cleaning, exploratory data analysis, statistical modeling, dan data visualization. Saya percaya bahwa setiap dataset memiliki cerita yang menarik untuk diceritakan.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-pink-600">50+</div>
+                            <div class="text-gray-600">Proyek Selesai</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-pink-600">3+</div>
+                            <div class="text-gray-600">Tahun Pengalaman</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-6">Pendidikan & Sertifikasi</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 pink-gradient rounded-full mt-2"></div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">S1 Sistem Informasi</h5>
+                                    <p class="text-gray-600">Universitas Nurzin Hamzah</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 pink-gradient rounded-full mt-2"></div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Google Data Analytics Certificate</h5>
+                                    <p class="text-gray-600">Coursera</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-3 h-3 pink-gradient rounded-full mt-2"></div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Python for Data Science</h5>
+                                    <p class="text-gray-600">DataCamp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Keahlian Saya</h2>
+                <div class="w-20 h-1 pink-gradient mx-auto rounded"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-8">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-700">Python</span>
+                                <span class="text-pink-600">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-700">SQL</span>
+                                <span class="text-pink-600">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-700">R</span>
+                                <span class="text-pink-600">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-700">Tableau</span>
+                                <span class="text-pink-600">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-700">Power BI</span>
+                                <span class="text-pink-600">82%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="82"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-8">Tools & Technologies</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fab fa-python text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">Python</h4>
+                            <p class="text-sm text-gray-600">Pandas, NumPy, Scikit-learn</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fas fa-database text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">SQL</h4>
+                            <p class="text-sm text-gray-600">MySQL, PostgreSQL</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fas fa-chart-bar text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">Tableau</h4>
+                            <p class="text-sm text-gray-600">Data Visualization</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fas fa-file-excel text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">Excel</h4>
+                            <p class="text-sm text-gray-600">Advanced Analytics</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fab fa-git-alt text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">Git</h4>
+                            <p class="text-sm text-gray-600">Version Control</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md text-center card-hover">
+                            <i class="fas fa-brain text-3xl text-pink-600 mb-2"></i>
+                            <h4 class="font-semibold text-gray-800">Machine Learning</h4>
+                            <p class="text-sm text-gray-600">Predictive Modeling</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Proyek Terbaru</h2>
+                <div class="w-20 h-1 pink-gradient mx-auto rounded"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover fade-in">
+                    <div class="h-48 pink-gradient flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">E-commerce Sales Analysis</h3>
+                        <p class="text-gray-600 mb-4">Analisis mendalam terhadap data penjualan e-commerce untuk mengidentifikasi tren dan peluang pertumbuhan.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Pandas</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Tableau</span>
+                        </div>
+                        <button class="w-full pink-gradient text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover fade-in">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-heartbeat text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Healthcare Data Mining</h3>
+                        <p class="text-gray-600 mb-4">Menganalisis data kesehatan untuk memprediksi risiko penyakit dan meningkatkan kualitas pelayanan.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">R</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">SQL</span>
+                        </div>
+                        <button class="w-full pink-gradient text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover fade-in">
+                    <div class="h-48 bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Financial Market Analysis</h3>
+                        <p class="text-gray-600 mb-4">Analisis tren pasar keuangan dan pembuatan model prediksi untuk investasi yang lebih baik.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Time Series</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm">Power BI</span>
+                        </div>
+                        <button class="w-full pink-gradient text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Mari Berkolaborasi</h2>
+                <div class="w-20 h-1 pink-gradient mx-auto rounded"></div>
+                <p class="text-gray-600 mt-4">Tertarik untuk bekerja sama? Saya siap membantu proyek data analysis Anda!</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Hubungi Saya</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 pink-gradient rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Email</h4>
+                                    <p class="text-gray-600">elzamahdayanti7@email.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 pink-gradient rounded-full flex items-center justify-center">
+                                    <i class="fab fa-linkedin text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">LinkedIn</h4>
+                                    <p class="text-gray-600">linkedin.com/in/elzamahdayanti</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 pink-gradient rounded-full flex items-center justify-center">
+                                    <i class="fab fa-github text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">GitHub</h4>
+                                    <p class="text-gray-600">https://github.com/callelza</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 pink-gradient rounded-full flex items-center justify-center">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Telepon</h4>
+                                    <p class="text-gray-600">+62 823-8838-6075</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Kirim Pesan</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Nama</label>
+                                <input type="text" name="nama" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Nama Anda">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="email@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Pesan</label>
+                                <textarea rows="4" name="pesan" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+                            <button type="button" id="submit-btn" onclick="submitContactForm()" class="w-full pink-gradient text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <div class="fixed bottom-4 right-4 z-50">
+        <button onclick="toggleAdminPanel()" class="bg-pink-600 text-white p-3 rounded-full shadow-lg hover:bg-pink-700 transition-all">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+                <div class="bg-pink-600 text-white p-6 flex justify-between items-center">
+                    <h3 class="text-2xl font-bold">Panel Admin - Data Kontak</h3>
+                    <button onclick="toggleAdminPanel()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-pink-100 p-3 rounded-lg">
+                                <i class="fas fa-envelope text-pink-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Total Pesan Masuk</h4>
+                                <p class="text-2xl font-bold text-pink-600" id="contact-counter">0</p>
+                            </div>
+                        </div>
+                        <button onclick="exportContacts()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all">
+                            <i class="fas fa-download mr-2"></i>Export CSV
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-auto max-h-96">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Nama</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Email</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Pesan</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contacts-table-body">
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-gray-500">Belum ada pesan masuk</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                        <h5 class="font-semibold text-blue-800 mb-2">Informasi Database</h5>
+                        <p class="text-blue-700 text-sm">
+                            <strong>Demo Mode:</strong> Data disimpan di localStorage browser. Untuk implementasi production, 
+                            gunakan database MySQL dengan PyMySQL dan API backend.
+                        </p>
+                        <div class="mt-3 text-xs text-blue-600">
+                            <p><strong>Struktur Database MySQL:</strong></p>
+                            <code class="bg-blue-100 p-2 rounded block mt-1">
+                                CREATE TABLE contacts (<br>
+                                &nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+                                &nbsp;&nbsp;nama VARCHAR(255) NOT NULL,<br>
+                                &nbsp;&nbsp;email VARCHAR(255) NOT NULL,<br>
+                                &nbsp;&nbsp;pesan TEXT NOT NULL,<br>
+                                &nbsp;&nbsp;tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP<br>
+                                );
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Elza Mahdayanti</h3>
+                <p class="text-gray-400 mb-6">Data Analyst | Mengubah Data Menjadi Insight</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/callelza" class="text-gray-400 hover:text-pink-400 transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/callelza_?igsh=MzNwaGg0M2Rpbjdj&utm_source=qr" class="text-gray-400 hover:text-pink-400 transition-colors">
+                        <i class="fas fa-instagram text-2xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400">&copy; 2024 Elza Mahdayanti. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Add click handlers to navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Typing animation
+        const typingText = document.getElementById('typing-text');
+        const texts = ['Data Analyst', 'Problem Solver', 'Insight Creator'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+            }
+
+            setTimeout(typeWriter, isDeleting ? 50 : 100);
+        }
+
+        // Start typing animation
+        typeWriter();
+
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                }
+            });
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Contact form submission
+        async function submitContactForm() {
+            const form = document.getElementById('contact-form');
+            const formData = new FormData(form);
+            
+            const contactData = {
+                nama: formData.get('nama'),
+                email: formData.get('email'),
+                pesan: formData.get('pesan'),
+                tanggal: new Date().toISOString()
+            };
+
+            // Validate form
+            if (!contactData.nama || !contactData.email || !contactData.pesan) {
+                showNotification('Mohon lengkapi semua field!', 'error');
+                return;
+            }
+
+            // Show loading
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengirim...';
+            submitBtn.disabled = true;
+
+            try {
+                // Simulate API call to save to database
+                await simulateContactSave(contactData);
+                
+                // Show success message
+                showNotification('Pesan berhasil dikirim! Terima kasih telah menghubungi saya.', 'success');
+                form.reset();
+                
+                // Update contact counter
+                updateContactCounter();
+                
+            } catch (error) {
+                showNotification('Terjadi kesalahan. Silakan coba lagi.', 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Simulate database save (in real implementation, this would be a server-side API)
+        function simulateContactSave(contactData) {
+            return new Promise((resolve) => {
+                // Simulate network delay
+                setTimeout(() => {
+                    // Save to localStorage for demo purposes
+                    let contacts = JSON.parse(localStorage.getItem('portfolio_contacts') || '[]');
+                    contacts.push({
+                        id: Date.now(),
+                        ...contactData
+                    });
+                    localStorage.setItem('portfolio_contacts', JSON.stringify(contacts));
+                    resolve();
+                }, 1500);
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transform transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+
+        // Update contact counter
+        function updateContactCounter() {
+            const contacts = JSON.parse(localStorage.getItem('portfolio_contacts') || '[]');
+            const counter = document.getElementById('contact-counter');
+            if (counter) {
+                counter.textContent = contacts.length;
+            }
+        }
+
+        // Admin panel functions
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                loadContactData();
+            }
+        }
+
+        function loadContactData() {
+            const contacts = JSON.parse(localStorage.getItem('portfolio_contacts') || '[]');
+            const tbody = document.getElementById('contacts-table-body');
+            
+            if (contacts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-gray-500">Belum ada pesan masuk</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = contacts.map(contact => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="py-3 px-4">${contact.nama}</td>
+                    <td class="py-3 px-4">${contact.email}</td>
+                    <td class="py-3 px-4">${contact.pesan.substring(0, 50)}${contact.pesan.length > 50 ? '...' : ''}</td>
+                    <td class="py-3 px-4">${new Date(contact.tanggal).toLocaleDateString('id-ID')}</td>
+                </tr>
+            `).join('');
+        }
+
+        function exportContacts() {
+            const contacts = JSON.parse(localStorage.getItem('portfolio_contacts') || '[]');
+            if (contacts.length === 0) {
+                alert('Tidak ada data untuk diekspor');
+                return;
+            }
+            
+            const csv = [
+                ['Nama', 'Email', 'Pesan', 'Tanggal'],
+                ...contacts.map(c => [c.nama, c.email, c.pesan, new Date(c.tanggal).toLocaleDateString('id-ID')])
+            ].map(row => row.map(field => `"${field}"`).join(',')).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kontak_portofolio.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Scroll event listeners
+        window.addEventListener('scroll', () => {
+            animateSkillBars();
+            animateOnScroll();
+        });
+
+        // Initial animations
+        window.addEventListener('load', () => {
+            animateSkillBars();
+            animateOnScroll();
+            updateContactCounter();
+        });
+
+        // Add active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-pink-600');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-pink-600');
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980e4c9211a79cb7',t:'MTc1ODE3MTgzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
